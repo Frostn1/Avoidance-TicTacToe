@@ -3,12 +3,13 @@
 
 void LoadBoardFromMemory(Game* gme, int amount)
 {
-	if (amount >= gme->memory->boards->spot)
+	if (amount > gme->memory->spot)
 		return;
 
 	
 	gme->currentBoard = &gme->memory->boards[gme->memory->spot - amount];
 	gme->numberOfTurns -= amount;
+	gme->memory->spot -= amount;
 	if (gme->currentTurn == 'X')
 		gme->currentTurn = 'O';
 	else
@@ -22,13 +23,10 @@ void PrintBoard(Game* gme)
 	
 	for (i = 0; i < gme->currentBoard->maxSize; i++)
 	{
-
-		//printf("|");
 		putchar('|');
 		for (j = 0; j < gme->currentBoard->maxSize; j++)
 		{
 			putchar(gme->currentBoard->pieces[counter].type);
-			//printf("%c", gme->currentBoard->pieces[i].type);
 			putchar('|');
 			counter++;
 		}

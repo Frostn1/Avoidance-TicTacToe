@@ -28,3 +28,120 @@ void FillEmpty(Board* brd)
 		tempSlot.row++;
 	}
 }
+
+
+Capsule ValidateBoard(Board* brd)
+{
+	
+	Capsule ansr;
+
+	//Row Check
+	bool rowFlag;
+	char pre;
+	for (int i = 0; i < brd->maxSize; i++)
+	{
+		rowFlag = true;
+		pre = brd->pieces[i * brd->maxSize].type;
+		for (int j = 1; j < brd->maxSize; j++)
+		{
+			if (pre == brd->pieces[j  + i * brd->maxSize].type)
+				pre = brd->pieces[j  + i * brd->maxSize].type;
+			else
+			{
+				rowFlag = false;
+				break;
+			}		
+		}
+		if (rowFlag && pre != '_')
+		{
+			if (pre == 'X')
+				ansr.winner = 'O';
+			else
+				ansr.winner = 'X';
+			ansr.end = true;
+			return ansr;			
+		}		
+	}
+
+
+	//Column Check
+	bool colFlag;
+	
+
+	for (int i = 0; i < brd->maxSize; i++)
+	{
+		colFlag = true;
+		pre = brd->pieces[i * brd->maxSize].type;
+		for (int j = 1; j < brd->maxSize; j++)
+		{
+			if (pre == brd->pieces[i + j * brd->maxSize].type)
+				pre = brd->pieces[i + j * brd->maxSize].type;
+			else
+			{
+				colFlag = false;
+				break;
+			}
+		}
+		if (colFlag && pre != '_')
+		{
+			if (pre == 'X')
+				ansr.winner = 'O';
+			else
+				ansr.winner = 'X';
+			ansr.end = true;
+			return ansr;
+		}
+	}
+
+
+	//Diagonal Check
+	bool diaFlag = true;
+	//First Diagonal from top left to bottom right
+	pre = brd->pieces[0].type;
+	for (int j = 1; j < brd->maxSize; j++)
+	{
+		if (pre == brd->pieces[j * brd->maxSize + j].type)
+			pre = brd->pieces[j * brd->maxSize + j].type;
+		else
+		{
+			diaFlag = false;
+			break;
+		}
+	}
+	if (diaFlag && pre != '_')
+	{
+		if (pre == 'X')
+			ansr.winner = 'O';
+		else
+			ansr.winner = 'X';
+		ansr.end = true;
+		return ansr;
+	}
+	
+	//Second Diagonal from top right to bottom left
+	diaFlag = true;
+	pre = brd->pieces[brd->maxSize-1].type;
+	for (int j = 1; j < brd->maxSize; j++)
+	{
+		if (pre == brd->pieces[j*2 + brd->maxSize-1].type)
+			pre = brd->pieces[j*2 + brd->maxSize-1].type;
+		else
+		{
+			diaFlag = false;
+			break;
+		}
+	}
+	if (diaFlag && pre != '_')
+	{
+		if (pre == 'X')
+			ansr.winner = 'O';
+		else
+			ansr.winner = 'X';
+		ansr.end = true;
+		return ansr;
+	}
+
+	ansr.end = false;
+	ansr.winner = '_';
+	return ansr;
+}
