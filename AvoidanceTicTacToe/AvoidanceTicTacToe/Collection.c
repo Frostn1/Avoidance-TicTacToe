@@ -1,5 +1,8 @@
 #include "Collection.h"
 
+/*
+Saving a new board onto the collection, and transfering all of the data from a board ,onto a board inside of the board array of the collection
+*/
 void PushBoard(Collection* clt, Board brd)
 {
 	//clt->boards[clt->spot++] = brd;

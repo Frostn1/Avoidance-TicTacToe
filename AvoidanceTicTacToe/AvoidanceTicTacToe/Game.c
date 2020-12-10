@@ -1,6 +1,8 @@
 #include "Game.h"
 #include <stdio.h>
-
+/*
+Function that loades a board from the memory of the game
+*/
 void LoadBoardFromMemory(Game* gme, int amount)
 {
 	if (amount > gme->memory->spot)
@@ -16,7 +18,9 @@ void LoadBoardFromMemory(Game* gme, int amount)
 		gme->currentTurn = 'X';
 	
 }
-
+/*
+Function that prints the current board in the game
+*/
 void PrintBoard(Game* gme)
 {
 	int i = 0, j = 0, counter = 0;
@@ -35,7 +39,9 @@ void PrintBoard(Game* gme)
 	
 }
 
-
+/*
+The turn cycle function of the game, saving the current board and adding the new slot to the current one
+*/
 void AddTurn(Game* gme, Slot slt)
 {
 	PushBoard(gme->memory, *gme->currentBoard);

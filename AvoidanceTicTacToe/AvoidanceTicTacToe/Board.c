@@ -1,17 +1,20 @@
 #include "Board.h"
 
-#define WINNER1 1
-#define WINNER2 2
 
+
+/*
+Saving a slot inside of the board array
+*/
 void PushSlot(Board* brd, Slot slt)
 {
-	
-	brd->pieces[slt.column+slt.row*brd->maxSize-brd->maxSize-1] =  slt;
 	//Push a slot into the board
 	//Push it into the correct slot 
+	brd->pieces[slt.column+slt.row*brd->maxSize-brd->maxSize-1] =  slt;
 }
 
-
+/*
+Function that is used in the init stage and is filling the board with "empty" slots ( Check out the empty define ) 
+*/
 void FillEmpty(Board* brd)
 {
 	Slot tempSlot;
@@ -31,7 +34,9 @@ void FillEmpty(Board* brd)
 	}
 }
 
-
+/*
+Function that validates the board and checks if there is a winner condition on the board
+*/
 Capsule ValidateBoard(Board* brd)
 {
 	

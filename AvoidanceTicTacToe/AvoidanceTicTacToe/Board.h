@@ -5,8 +5,8 @@
 #include <stdbool.h>
 
 #define EMPTYSLOT '_'
-
-
+#define WINNER1 1
+#define WINNER2 2
 
 typedef struct Board
 {

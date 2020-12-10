@@ -1,6 +1,9 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Game.h"
 #include <stdio.h>
+/*
+Init function of a game struct, by getting a size of the board and allocating all of the memory
+*/
 Game InitGame(unsigned int size)
 {
 	Game gme;
@@ -16,10 +19,17 @@ Game InitGame(unsigned int size)
 	FillEmpty(gme.currentBoard);
 	return gme;
 }
+
+/*
+Welcome messgae to start the game
+*/
 void Welcome()
 {
 	printf("*** Welcome to AVOIDANCE TIC-TAC-TOE game ***\n\n");
 }
+/*
+Making the turn, either valid turn or valid undo turn
+*/
 void DoTurn(Game* gameTemp, Slot* slt)
 {
 	if (slt->row < 0)
@@ -39,6 +49,9 @@ void DoTurn(Game* gameTemp, Slot* slt)
 		gameTemp->currentPlayer = 1;
 }
 
+/*
+Checking the input is valid
+*/
 bool CheckSpot(Game* gme,Slot tmp)
 {
 	if (tmp.row > gme->currentBoard->maxSize || tmp.column > gme->currentBoard->maxSize || tmp.row < 0 && tmp.row * (-1) > gme->memory->spot)
@@ -56,6 +69,9 @@ bool CheckSpot(Game* gme,Slot tmp)
 		return true;
 	}
 }
+/*
+Input loop for x y system of the game
+*/
 void MoveInput(Game* gme)
 {
 	Slot sltTemp;
@@ -67,6 +83,9 @@ void MoveInput(Game* gme)
 	DoTurn(gme, &sltTemp);
 	putchar('\n');
 }
+/*
+Main loop of the game, calls all of the other functions
+*/
 void MainLoop(Game* gme)
 {
 	Capsule answer;
@@ -88,6 +107,9 @@ void MainLoop(Game* gme)
 	}
 }
 
+/*
+Freeing all of the memory allocated before
+*/
 void freeGame(Game* gme)
 {
 	for (int i = gme->memory->spot; i > 0; i--)
@@ -99,6 +121,8 @@ void freeGame(Game* gme)
 	free(gme->memory->boards);
 	free(gme->memory);
 }
+
+
 int main() 
 {
 	Game gme;
