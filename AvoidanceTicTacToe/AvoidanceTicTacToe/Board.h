@@ -19,7 +19,7 @@ typedef struct Board
 typedef struct Capsule
 {
 	bool end;
-	char winner;
+	int winner;
 }Capsule;
  
 void PushSlot(Board* brd, Slot slt);

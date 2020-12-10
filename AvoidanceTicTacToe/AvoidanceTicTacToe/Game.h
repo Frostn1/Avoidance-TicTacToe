@@ -7,6 +7,7 @@ typedef struct Game
 	Board* currentBoard;
 	char currentTurn;
 	int numberOfTurns;
+	int currentPlayer;
 }Game;
 
 void LoadBoardFromMemory(Game* gme, int amount);

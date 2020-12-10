@@ -5,8 +5,8 @@
 typedef struct Slot
 {
 	char type;
-	unsigned int row;
-	unsigned int column;
+	int row;
+	int column;
 }Slot;
 
 #endif // !SLOT_H

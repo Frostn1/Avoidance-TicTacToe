@@ -1,5 +1,7 @@
 #include "Board.h"
 
+#define WINNER1 1
+#define WINNER2 2
 
 void PushSlot(Board* brd, Slot slt)
 {
@@ -55,9 +57,9 @@ Capsule ValidateBoard(Board* brd)
 		if (rowFlag && pre != '_')
 		{
 			if (pre == 'X')
-				ansr.winner = 'O';
+				ansr.winner = WINNER2;
 			else
-				ansr.winner = 'X';
+				ansr.winner = WINNER1;
 			ansr.end = true;
 			return ansr;			
 		}		
@@ -85,9 +87,9 @@ Capsule ValidateBoard(Board* brd)
 		if (colFlag && pre != '_')
 		{
 			if (pre == 'X')
-				ansr.winner = 'O';
+				ansr.winner = WINNER2;
 			else
-				ansr.winner = 'X';
+				ansr.winner = WINNER1;
 			ansr.end = true;
 			return ansr;
 		}
@@ -111,9 +113,9 @@ Capsule ValidateBoard(Board* brd)
 	if (diaFlag && pre != '_')
 	{
 		if (pre == 'X')
-			ansr.winner = 'O';
+			ansr.winner = WINNER2;
 		else
-			ansr.winner = 'X';
+			ansr.winner = WINNER1;
 		ansr.end = true;
 		return ansr;
 	}
@@ -134,9 +136,9 @@ Capsule ValidateBoard(Board* brd)
 	if (diaFlag && pre != '_')
 	{
 		if (pre == 'X')
-			ansr.winner = 'O';
+			ansr.winner = WINNER2;
 		else
-			ansr.winner = 'X';
+			ansr.winner = WINNER1;
 		ansr.end = true;
 		return ansr;
 	}
