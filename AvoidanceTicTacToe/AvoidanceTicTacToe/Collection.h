@@ -1,6 +1,8 @@
 #ifndef COLLECTION_H
 #define COLLECTION_H
 
+#include <stdlib.h>
+
 #include "Board.h"
 
 typedef struct Collection

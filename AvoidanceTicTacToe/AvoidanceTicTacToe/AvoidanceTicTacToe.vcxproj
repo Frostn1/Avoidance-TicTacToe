@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -141,15 +141,19 @@
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="Collection.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Slot.h" />
+    <ClInclude Include="WhiteMarker.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Board.c" />
     <ClCompile Include="Collection.c" />
+    <ClCompile Include="Controller.c" />
     <ClCompile Include="Game.c" />
     <ClCompile Include="Main.c" />
     <ClCompile Include="Slot.c" />
+    <ClCompile Include="WhiteMarker.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

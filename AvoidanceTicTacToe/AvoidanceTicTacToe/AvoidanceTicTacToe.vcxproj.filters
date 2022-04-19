@@ -27,6 +27,12 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WhiteMarker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Slot.c">
@@ -42,6 +48,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WhiteMarker.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
