@@ -9,7 +9,7 @@ void PushSlot(Board* brd, Slot slt)
 {
 	//Push a slot into the board
 	//Push it into the correct slot 
-	brd->pieces[slt.column+slt.row*brd->maxSize-brd->maxSize-1] =  slt;
+	brd->pieces[slt.column+slt.row*brd->maxSize] = slt;
 }
 
 /*
@@ -18,8 +18,8 @@ Function that is used in the init stage and is filling the board with "empty" sl
 void FillEmpty(Board* brd)
 {
 	Slot tempSlot;
-	tempSlot.column = 1;
-	tempSlot.row = 1;
+	tempSlot.column = 0;
+	tempSlot.row = 0;
 	tempSlot.type = EMPTYSLOT;
 	int i = 0, j = 0;
 	for  (i = 0; i < brd->maxSize; i++) {
@@ -27,7 +27,7 @@ void FillEmpty(Board* brd)
 			PushSlot(brd, tempSlot);
 			tempSlot.column++;
 		}
-		tempSlot.column = 1;
+		tempSlot.column = 0;
 		tempSlot.row++;
 	}
 }

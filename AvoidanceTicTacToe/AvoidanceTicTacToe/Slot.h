@@ -2,11 +2,10 @@
 #define SLOT_H
 
 
-typedef struct Slot
-{
+typedef struct Slot {
 	char type;
 	int row;
 	int column;
-}Slot;
+} Slot;
 
 #endif // !SLOT_H

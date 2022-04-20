@@ -1,12 +1,17 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Collection.h"
 #include <stdint.h>
+
+#include "Collection.h"
+#include "WhiteMarker.h"
+#include "Board.h"
+
 #define MAX_BOARD_SIZE 11
 #define MIN_BOARD_SIZE 1
 #define BOXED_STYLE 0x01
 #define CROSSED_STYLE 0x02
+
 typedef struct Game {
 	Collection* memory;
 	Board* currentBoard;
@@ -16,7 +21,7 @@ typedef struct Game {
 }Game;
 
 void LoadBoardFromMemory(Game* gme, int amount);
-void PrintBoard(Game* gme, uint8_t style, uint8_t padding);
+void PrintBoard(Game* gme, uint8_t style, uint8_t padding, uint16_t xcord, uint16_t ycord);
 void AddTurn(Game* gme, Slot slt);
 void freeGame(Game* gme);
 

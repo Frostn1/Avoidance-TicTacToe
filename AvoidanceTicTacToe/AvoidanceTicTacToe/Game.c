@@ -20,8 +20,8 @@ void LoadBoardFromMemory(Game* gme, int amount) {
 /*
 Function that prints the current board in the game
 */
-void PrintBoard(Game* gme, uint8_t style, uint8_t padding) {
-
+void PrintBoard(Game* gme, uint8_t style, uint8_t padding, uint16_t xcord, uint16_t ycord) {
+	__CLS__();
 	if (style & BOXED_STYLE) {
 		int i = 0, j = 0, counter = 0;
 
@@ -61,7 +61,10 @@ void PrintBoard(Game* gme, uint8_t style, uint8_t padding) {
 			if (i < gme->currentBoard->maxSize - 1) {
 				printf("%*s", padding, "");
 				for (j = 0; j < gme->currentBoard->maxSize; j++) {
-					printf("___");
+					if(i == xcord && j == ycord)
+						printf("===");
+					else
+						printf("___");
 					j < gme->currentBoard->maxSize - 1 ? putchar('|') : j;
 				}
 				putchar('\n');

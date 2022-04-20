@@ -13,6 +13,8 @@
 
 #define DOWN_ARROW 0x50
 #define UP_ARROW 0x48
+#define LEFT_ARROW 0x4B
+#define RIGHT_ARROW 0x4D
 #define ENTER 0x0D
 
 #define INVALID_ASCII -32
@@ -29,7 +31,7 @@ Game InitGame(unsigned int size);
 uint8_t Welcome();
 void DoTurn(Game* gameTemp, Slot* slt);
 bool CheckSpot(Game* gme, Slot tmp);
-void MoveInput(Game* gme);
+Slot MoveInput(Game* gme, uint8_t style, uint8_t padding, uint16_t prex, uint16_t prey);
 void MainLoop(Game* gme);
 
 

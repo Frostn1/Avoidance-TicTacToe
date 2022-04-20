@@ -141,7 +141,7 @@ bool CheckSpot(Game* gme, Slot tmp) {
 		printf("Illegal move!!!\n");
 		return true;
 	}
-	else if (gme->currentBoard->pieces[tmp.row * gme->currentBoard->maxSize - gme->currentBoard->maxSize + tmp.column - 1].type != '_') {
+	else if (gme->currentBoard->pieces[tmp.column + tmp.row * gme->currentBoard->maxSize].type != '_') {
 		printf("Illegal move!!!\n");
 		return true;
 	}
@@ -152,32 +152,85 @@ bool CheckSpot(Game* gme, Slot tmp) {
 /*
 Input loop for x y system of the game
 */
-void MoveInput(Game* gme) {
-	Slot sltTemp;
-	do {
+Slot MoveInput(Game* gme, uint8_t style, uint8_t padding, uint16_t prex, uint16_t prey) {
+
+	bool flag = true;
+	char ch = 'a';
+	Slot sltTemp = { EMPTYSLOT,prey,prex };
+	
+
+	while (flag || CheckSpot(gme, sltTemp)) {
+		ch = getch();
+		if (ch == INVALID_ASCII)
+			ch = getch();
+		//printf("%d %c", ch, ch);
+		switch (ch) {
+		case ENTER:
+			// ENTER
+			flag = false;
+			break;
+		case DOWN_ARROW:
+			// RIGHT
+			flag = true;
+			if (sltTemp.row < gme->currentBoard->maxSize - 1) sltTemp.row++;
+			else sltTemp.row = 0;
+			__MOVE_POS__();
+			PrintBoard(gme, style, padding, sltTemp.row, sltTemp.column);
+			break;
+		case UP_ARROW:
+			// LEFT
+			flag = true;
+			if (sltTemp.row) sltTemp.row--;
+			else sltTemp.row = gme->currentBoard->maxSize - 1;
+			__MOVE_POS__();
+			PrintBoard(gme, style, padding, sltTemp.row, sltTemp.column);
+			break;
+		case RIGHT_ARROW:
+			// DOWN
+			flag = true;
+			if (sltTemp.column < gme->currentBoard->maxSize - 1) sltTemp.column++;
+			else sltTemp.column = 0;
+			__MOVE_POS__();
+			PrintBoard(gme, style, padding, sltTemp.row, sltTemp.column);
+			break;
+		case LEFT_ARROW:
+			// UP
+			flag = true;
+			if (sltTemp.column) sltTemp.column--;
+			else sltTemp.column = gme->currentBoard->maxSize - 1;
+			__MOVE_POS__();
+			PrintBoard(gme, style, padding, sltTemp.row, sltTemp.column);
+			break;
+		}
+	}
+	/*do {
 		printf("Player ** %d **, enter next move:\n", gme->currentPlayer);
 		scanf("%d %d", &sltTemp.row, &sltTemp.column);
-	} while (sltTemp.row > gme->currentBoard->maxSize || sltTemp.column > gme->currentBoard->maxSize || sltTemp.row < 0 && sltTemp.row * (-1) > gme->memory->spot || CheckSpot(gme, sltTemp) == true);
-	DoTurn(gme, &sltTemp);
-	putchar('\n');
+	} while (sltTemp.row > gme->currentBoard->maxSize || sltTemp.column > gme->currentBoard->maxSize || sltTemp.row < 0 && sltTemp.row * (-1) > gme->memory->spot || CheckSpot(gme, sltTemp));
+	//PrintBoard(gme, CROSSED_STYLE, 5,  sltTemp.column - 1, sltTemp.row - 1);
+	//DoTurn(gme, &sltTemp);
+	//putchar('\n');*/
+	return sltTemp;
 }
 /*
 Main loop of the game, calls all of the other functions
 */
 void MainLoop(Game* gme) {
 	Capsule answer;
-
+	Slot sltTemp = { EMPTYSLOT,0,0 };
+	PrintBoard(gme, CROSSED_STYLE, 5, 0, 0);
 	while (true) {
-		printf("Current Board:\n");
-		PrintBoard(gme, CROSSED_STYLE,5);
+		//printf("Current Board:\n");
+		sltTemp = MoveInput(gme, CROSSED_STYLE, 5, sltTemp.column, sltTemp.row);
+		DoTurn(gme, &sltTemp);
 		putchar('\n');
 		answer = ValidateBoard(gme->currentBoard);
 		if (answer.end) {
+			PrintBoard(gme, CROSSED_STYLE, 5, sltTemp.column, sltTemp.row);
 			printf("Player %d Wins! Hooray!\n", answer.winner);
+			getch();
 			break;
 		}
-		MoveInput(gme);
-
-
+		PrintBoard(gme, CROSSED_STYLE, 5, sltTemp.column, sltTemp.row);
 	}
 }
