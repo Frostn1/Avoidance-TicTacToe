@@ -5,6 +5,8 @@
 #include <stdbool.h>
 
 #define EMPTYSLOT '_'
+#define PLAYER1SLOT 'X'
+#define PLAYER2SLOT 'O'
 #define SPACE ' '
 #define WINNER1 1
 #define WINNER2 2

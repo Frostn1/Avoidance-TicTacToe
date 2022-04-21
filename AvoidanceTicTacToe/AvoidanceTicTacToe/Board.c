@@ -42,10 +42,11 @@ Capsule ValidateBoard(Board* brd) {
 	//Row Check
 	bool rowFlag;
 	char pre;
-	for (int i = 0; i < brd->maxSize; i++) {
+	int i = 0, j = 0;
+	for (i = 0; i < brd->maxSize; i++) {
 		rowFlag = true;
 		pre = brd->pieces[i * brd->maxSize].type;
-		for (int j = 1; j < brd->maxSize; j++) {
+		for (j = 1; j < brd->maxSize; j++) {
 			if (pre == brd->pieces[j  + i * brd->maxSize].type)
 				pre = brd->pieces[j  + i * brd->maxSize].type;
 			else {
@@ -53,9 +54,9 @@ Capsule ValidateBoard(Board* brd) {
 				break;
 			}		
 		}
-		if (rowFlag && pre != '_')
+		if (rowFlag && pre != EMPTYSLOT)
 		{
-			if (pre != 'X')
+			if (pre != PLAYER1SLOT)
 				ansr.winner = WINNER2;
 			else
 				ansr.winner = WINNER1;
@@ -69,11 +70,11 @@ Capsule ValidateBoard(Board* brd) {
 	bool colFlag;
 	
 
-	for (int i = 0; i < brd->maxSize; i++)
+	for (i = 0; i < brd->maxSize; i++)
 	{
 		colFlag = true;
-		pre = brd->pieces[i * brd->maxSize].type;
-		for (int j = 1; j < brd->maxSize; j++)
+		pre = brd->pieces[i].type;
+		for (j = 1; j < brd->maxSize; j++)
 		{
 			if (pre == brd->pieces[i + j * brd->maxSize].type)
 				pre = brd->pieces[i + j * brd->maxSize].type;
@@ -83,9 +84,9 @@ Capsule ValidateBoard(Board* brd) {
 				break;
 			}
 		}
-		if (colFlag && pre != '_')
+		if (colFlag && pre != EMPTYSLOT)
 		{
-			if (pre != 'X')
+			if (pre != PLAYER1SLOT)
 				ansr.winner = WINNER2;
 			else
 				ansr.winner = WINNER1;
@@ -107,8 +108,8 @@ Capsule ValidateBoard(Board* brd) {
 			break;
 		}
 	}
-	if (diaFlag && pre != '_') {
-		if (pre != 'X')
+	if (diaFlag && pre != EMPTYSLOT) {
+		if (pre != PLAYER1SLOT)
 			ansr.winner = WINNER2;
 		else
 			ansr.winner = WINNER1;
@@ -127,8 +128,8 @@ Capsule ValidateBoard(Board* brd) {
 			break;
 		}
 	}
-	if (diaFlag && pre != '_') {
-		if (pre != 'X')
+	if (diaFlag && pre != EMPTYSLOT) {
+		if (pre != PLAYER1SLOT)
 			ansr.winner = WINNER2;
 		else
 			ansr.winner = WINNER1;
@@ -137,6 +138,6 @@ Capsule ValidateBoard(Board* brd) {
 	}
 
 	ansr.end = false;
-	ansr.winner = '_';
+	ansr.winner = EMPTYSLOT;
 	return ansr;
 }

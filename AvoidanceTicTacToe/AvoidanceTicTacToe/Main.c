@@ -13,7 +13,9 @@ int main() {
 		optionSelected = Welcome();
 		if (optionSelected == OPTION_EXIT) return 0;
 		else if (optionSelected == OPTION_START) StartGame();
+		else if (optionSelected == OPTION_SETTINGS) SettingsMenu();
 		//else if (optionSelected == OPTION_HELP) // RUN HELP;
+		
 
 	}
 	

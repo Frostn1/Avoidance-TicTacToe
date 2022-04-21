@@ -20,6 +20,7 @@ typedef struct Game {
 	int currentPlayer;
 }Game;
 
+Game InitGame(unsigned int size);
 void LoadBoardFromMemory(Game* gme, int amount);
 void PrintBoard(Game* gme, uint8_t style, uint8_t padding, uint16_t xcord, uint16_t ycord);
 void AddTurn(Game* gme, Slot slt);

@@ -89,10 +89,10 @@ void AddTurn(Game* gme, Slot slt)
 	PushBoard(gme->memory, *gme->currentBoard);
 	PushSlot(gme->currentBoard, slt);
 	gme->numberOfTurns++;
-	if (gme->currentTurn == 'X')
-		gme->currentTurn = 'O';
+	if (gme->currentTurn == PLAYER1SLOT)
+		gme->currentTurn = PLAYER2SLOT;
 	else
-		gme->currentTurn = 'X';
+		gme->currentTurn = PLAYER1SLOT;
 }
 
 
@@ -117,4 +117,24 @@ void printPadding(int gameSize, uint8_t padding) {
 		j < gameSize - 1 ? putchar('|') : j;
 	}
 	putchar('\n');
+}
+
+
+/*
+Init function of a game struct, by getting a size of the board and allocating all of the memory
+*/
+Game InitGame(unsigned int size) {
+	Game gme;
+	gme.numberOfTurns = 0;
+	gme.currentTurn = 'X';
+	gme.currentPlayer = 1;
+	gme.currentBoard = (Board*)malloc(sizeof(Board));
+	gme.currentBoard->maxSize = size;
+	gme.currentBoard->pieces = (Slot*)malloc(sizeof(Slot) * gme.currentBoard->maxSize * gme.currentBoard->maxSize);
+	gme.memory = (Collection*)malloc(sizeof(Collection));
+	gme.memory->boards = (Board*)malloc(sizeof(Board) * gme.currentBoard->maxSize * gme.currentBoard->maxSize);
+	gme.memory->spot = 0;
+	FillEmpty(gme.currentBoard);
+
+	return gme;
 }
