@@ -232,7 +232,7 @@ Main loop of the game, calls all of the other functions
 void MainLoop(Game* gme) {
 	Capsule answer;
 	Slot sltTemp = { EMPTYSLOT,0,0 };
-	PrintBoard(gme, CROSSED_STYLE, 5, 0, 0);
+	PrintBoard(gme, CROSSED_STYLE, 5, gme->currentBoard->maxSize-1, 0);
 	while (gme->numberOfTurns < gme->currentBoard->maxSize * gme->currentBoard->maxSize) {
 		//printf("Current Board:\n");
 		sltTemp = MoveInput(gme, CROSSED_STYLE, 5, sltTemp.column, sltTemp.row);

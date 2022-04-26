@@ -22,6 +22,7 @@ Function that prints the current board in the game
 */
 void PrintBoard(Game* gme, uint8_t style, uint8_t padding, uint16_t xcord, uint16_t ycord) {
 	__CLS__();
+	__CURSOR_STATE__(false);
 	if (style & BOXED_STYLE) {
 		int i = 0, j = 0, counter = 0;
 
@@ -34,23 +35,24 @@ void PrintBoard(Game* gme, uint8_t style, uint8_t padding, uint16_t xcord, uint1
 			}
 			putchar('\n');
 		}
-	} else if (style & CROSSED_STYLE) {
+	}
+	else if (style & CROSSED_STYLE) {
 		int i = 0, j = 0, counter = 0;
 		/*
 		 x | x | x
 		___|___|___
-		   |   |   
-		 x | x | x 
+		   |   |
+		 x | x | x
 		___|___|___
-		   |   |   
+		   |   |
 		 x | x | x
 
-		
+
 		*/
 		printPadding(gme->currentBoard->maxSize, padding);
 		for (i = 0; i < gme->currentBoard->maxSize; i++) {
 			//putchar('|');
-			
+
 			printf("%*s", padding, "");
 			for (j = 0; j < gme->currentBoard->maxSize; j++) {
 				printf(" %c ", gme->currentBoard->pieces[counter].type != EMPTYSLOT ? gme->currentBoard->pieces[counter].type : SPACE);
@@ -58,27 +60,25 @@ void PrintBoard(Game* gme, uint8_t style, uint8_t padding, uint16_t xcord, uint1
 				counter++;
 			}
 			putchar('\n');
+
+			printf("%*s", padding, "");
+			for (j = 0; j < gme->currentBoard->maxSize; j++) {
+				if (i == xcord && j == ycord)
+					printf("===");
+				else if (i < gme->currentBoard->maxSize - 1)
+					printf("___");
+				else
+					printf("%*s", 3, "");
+				j < gme->currentBoard->maxSize - 1 ? putchar('|') : j;
+			}
 			if (i < gme->currentBoard->maxSize - 1) {
-				printf("%*s", padding, "");
-				for (j = 0; j < gme->currentBoard->maxSize; j++) {
-					if(i == xcord && j == ycord)
-						printf("===");
-					else
-						printf("___");
-					j < gme->currentBoard->maxSize - 1 ? putchar('|') : j;
-				}
 				putchar('\n');
 				printPadding(gme->currentBoard->maxSize, padding);
-				
 			}
-			
+
+
 		}
-		printPadding(gme->currentBoard->maxSize, padding);
-
-
 	}
-	
-	
 }
 
 /*
